@@ -11,7 +11,9 @@ public class PreferenceManager {
     int PRIVATE_MODE = 0;
 
     private static final String PREF_NAME = "onboarding";
+
     private static final String IS_FIRST_TIME_LAUNCH = "isFirstTimeOnboarding";
+    private static final String IS_REGISTERED = "isRegistered";
 
     public PreferenceManager(Context context){
         this._context = context;
@@ -24,7 +26,17 @@ public class PreferenceManager {
         editor.commit();
     }
 
+    public void setRegistered(boolean isRegistered){
+        editor.putBoolean(IS_REGISTERED, isRegistered);
+        editor.commit();
+    }
+
     public boolean isFirstTimeLaunch(){
         return preference.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
+
+    public boolean isRegistered(){
+        return preference.getBoolean(IS_REGISTERED, false);
+    }
+
 }
