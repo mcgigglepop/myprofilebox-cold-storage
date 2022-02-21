@@ -6,15 +6,18 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context="com.mcgigglepop.myprofilebox.LoginActivity">
 
     <TextView
-        android:textAppearance="@android:style/TextAppearance.Large"
-        android:text="Please enter PIN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:textAlignment="center"
+        android:text="Enter Passcode"
+        android:layout_marginBottom="30dp"
+        android:textAllCaps="true"
+        android:textAppearance="@android:style/TextAppearance.Large" />
 
     <com.mcgigglepop.myprofilebox.PinEntryEditText
         android:id="@+id/txt_pin_entry"
