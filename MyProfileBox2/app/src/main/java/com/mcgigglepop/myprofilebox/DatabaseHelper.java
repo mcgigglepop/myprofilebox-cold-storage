@@ -1,5 +1,6 @@
 package com.mcgigglepop.myprofilebox;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -108,6 +109,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }else{
             return false;
         }
+    }
+
+    public boolean checkPassword(String password){
+        String username = "admin";
+        db = openDatabase();
+
+        String selection = "username = ? and password = ?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query(USER_TABLE, null, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+
+        cursor.close();
+        close();
+
+        if(count > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void setPassword(String password){
+        db = openDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", "admin");
+        contentValues.put("password", password);
+        db.insert(USER_TABLE, null, contentValues);
+
+        close();
+
     }
 
 }
