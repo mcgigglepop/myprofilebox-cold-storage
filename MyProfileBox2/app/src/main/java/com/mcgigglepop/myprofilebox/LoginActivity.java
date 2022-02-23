@@ -10,10 +10,14 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
+    DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        databaseHelper = new DatabaseHelper(LoginActivity.this);
 
         final PinEntryEditText txtPinEntry = (PinEntryEditText) findViewById(R.id.txt_pin_entry);
         txtPinEntry.addTextChangedListener(new TextWatcher() {
@@ -29,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().equals("123456")) {
+                if (databaseHelper.checkPassword(s.toString())) {
                     Intent intent = new Intent(LoginActivity.this, HomePage.class);
                     startActivity(intent);
                     finish();
