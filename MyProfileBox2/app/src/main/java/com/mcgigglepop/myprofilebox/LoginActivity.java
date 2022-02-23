@@ -2,6 +2,7 @@ package com.mcgigglepop.myprofilebox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,7 +30,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("123456")) {
-                    Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomePage.class);
+                    startActivity(intent);
+                    finish();
                 } else if (s.length() == "123456".length()) {
                     Toast.makeText(LoginActivity.this, "Incorrect", Toast.LENGTH_SHORT).show();
                     txtPinEntry.setText(null);
