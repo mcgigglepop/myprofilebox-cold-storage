@@ -37,6 +37,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_onboarding);
 
+        myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
@@ -51,5 +52,8 @@ public class OnboardingActivity extends AppCompatActivity {
 
         addBottomDots(0);
         changeStatusBarColor();
+
+        viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
     }
 }
