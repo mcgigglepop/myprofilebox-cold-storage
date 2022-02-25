@@ -41,12 +41,15 @@ public class OnboardingActivity extends AppCompatActivity {
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
-        
+
         layouts = new int[]{
                 R.layout.onboarding_slide1,
                 R.layout.onboarding_slide2,
                 R.layout.onboarding_slide3,
                 R.layout.onboarding_slide_4
         };
+
+        addBottomDots(0);
+        changeStatusBarColor();
     }
 }
