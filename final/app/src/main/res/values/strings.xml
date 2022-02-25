@@ -3,4 +3,16 @@
     <string name="start">GOT IT</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
+
+    <string name="slide_1_title">Black Box</string>
+    <string name="slide_1_desc">Cold Storage Password Manager</string>
+
+    <string name="slide_2_title">Offline Storage</string>
+    <string name="slide_2_desc">Secured local storage without a need to traverse the internet.</string>
+
+    <string name="slide_3_title">Password Protected</string>
+    <string name="slide_3_desc">Protected with one master pin</string>
+
+    <string name="slide_4_title">Secured Sharing</string>
+    <string name="slide_4_desc">Share user credentials through multi-factor encrypted authentication</string>
 </resources>
