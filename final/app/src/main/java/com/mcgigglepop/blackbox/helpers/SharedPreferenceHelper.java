@@ -32,4 +32,8 @@ public class SharedPreferenceHelper {
         editor.putBoolean(IS_REGISTERED, isRegistered);
         editor.commit();
     }
+
+    public boolean getRegistered(){
+        return preference.getBoolean(IS_REGISTERED, false);
+    }
 }
