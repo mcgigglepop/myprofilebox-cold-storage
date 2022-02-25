@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Black Box</string>
+    <string name="start">GOT IT</string>
+    <string name="next">NEXT</string>
 </resources>
