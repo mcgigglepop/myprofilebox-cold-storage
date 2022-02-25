@@ -19,8 +19,8 @@ public class SharedPreferenceHelper {
         editor = preference.edit();
     }
 
-    public void setFirstTimeLaunch(boolean isFirstTimeLaunched){
-        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTimeLaunched);
+    public void setFirstTimeLaunch(boolean isFirstTimeLaunch){
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTimeLaunch);
         editor.commit();
     }
 }
