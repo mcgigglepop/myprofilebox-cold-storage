@@ -36,5 +36,10 @@ public class OnboardingActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_onboarding);
+        
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+        btnSkip = (Button) findViewById(R.id.btn_skip);
+        btnNext = (Button) findViewById(R.id.btn_next);
     }
 }
