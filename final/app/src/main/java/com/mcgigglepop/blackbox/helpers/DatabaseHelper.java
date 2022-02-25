@@ -37,4 +37,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             copyDatabase();
         }
     }
+
+    private boolean checkDbExist(){
+        SQLiteDatabase sqLiteDatabase = null;
+        try{
+            String path = DATABASE_PATH + DATABASE_NAME;
+            sqLiteDatabase = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+        } catch(Exception e){
+
+        }
+        if(sqLiteDatabase != null){
+            sqLiteDatabase.close();
+            return true;
+        }
+        return false;
+    }
 }
