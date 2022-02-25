@@ -29,4 +29,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    public void createDb(){
+        boolean dbExist = checkDbExist();
+        if(!dbExist){
+            this.getReadableDatabase();
+            copyDatabase();
+        }
+    }
 }
