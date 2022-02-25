@@ -24,6 +24,10 @@ public class SharedPreferenceHelper {
         editor.commit();
     }
 
+    public boolean getFirstTimeLaunch(){
+        return preference.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    }
+
     public void setRegistered(boolean isRegistered){
         editor.putBoolean(IS_REGISTERED, isRegistered);
         editor.commit();
