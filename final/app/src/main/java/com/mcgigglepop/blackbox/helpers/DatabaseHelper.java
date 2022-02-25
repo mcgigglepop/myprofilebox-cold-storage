@@ -2,6 +2,7 @@ package com.mcgigglepop.blackbox.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -101,6 +102,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(USER_TABLE, null, contentValues);
 
         close();
+    }
 
+    public boolean checkPassword(String password){
+        String username = "admin";
+        db = openDatabase();
+        String selection = "username = ? and password = ?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query(USER_TABLE, null, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        close();
+
+        if(count > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
