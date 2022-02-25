@@ -14,6 +14,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     SQLiteDatabase db;
 
+    public DatabaseHelper(Context context){
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
+        createDb();
+    }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
