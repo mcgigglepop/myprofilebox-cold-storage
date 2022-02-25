@@ -1,5 +1,6 @@
 package com.mcgigglepop.blackbox.helpers;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -90,5 +91,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(db != null){
             db.close();
         }
+    }
+
+    public void setPassword(String password){
+        db = openDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", "admin");
+        contentValues.put("password", password);
+        db.insert(USER_TABLE, null, contentValues);
+
+        close();
+
     }
 }
