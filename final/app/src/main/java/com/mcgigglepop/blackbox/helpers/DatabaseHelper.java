@@ -79,4 +79,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
+
+    private SQLiteDatabase openDatabase(){
+        String path = DATABASE_PATH + DATABASE_NAME;
+        db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READWRITE);
+        return db;
+    }
+
+    public void close(){
+        if(db != null){
+            db.close();
+        }
+    }
 }
