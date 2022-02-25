@@ -102,4 +102,9 @@ public class OnboardingActivity extends AppCompatActivity {
         if (dots.length > 0)
             dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
+
+    // get current item
+    private int getItem(int i){
+        return viewPager.getCurrentItem() + i;
+    }
 }
