@@ -3,6 +3,7 @@ package com.mcgigglepop.blackbox;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -106,5 +107,22 @@ public class OnboardingActivity extends AppCompatActivity {
     // get current item
     private int getItem(int i){
         return viewPager.getCurrentItem() + i;
+    }
+
+    // launch home screen method
+    private void launchHomeScreen() {
+        // set first launch to false
+        prefManager.setFirstTimeLaunch(false);
+
+        //check if registered
+        if (!prefManager.getRegistered()) {
+            // send them to register
+            startActivity(new Intent(OnboardingActivity.this, RegisterActivity.class));
+            finish();
+        }else {
+            // send them to login
+            startActivity(new Intent(OnboardingActivity.this, LoginActivity.class));
+            finish();
+        }
     }
 }
