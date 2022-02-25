@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mcgigglepop.blackbox.helpers.SharedPreferenceHelper;
+import com.mcgigglepop.blackbox.helpers.SharedPreferenceManager;
 
 public class OnboardingActivity extends AppCompatActivity {
     private ViewPager viewPager;

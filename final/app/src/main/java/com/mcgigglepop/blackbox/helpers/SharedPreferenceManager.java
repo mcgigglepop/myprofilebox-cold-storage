@@ -3,7 +3,7 @@ package com.mcgigglepop.blackbox.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class SharedPreferenceHelper {
+public class SharedPreferenceManager {
     SharedPreferences preference;
     SharedPreferences.Editor editor;
     Context _context;
@@ -13,7 +13,7 @@ public class SharedPreferenceHelper {
     private static final String IS_FIRST_TIME_LAUNCH = "isFirstTimeOnboarding";
     private static final String IS_REGISTERED = "isRegistered";
 
-    public SharedPreferenceHelper(Context context){
+    public SharedPreferenceManager(Context context){
         this._context = context;
         preference = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = preference.edit();
