@@ -66,7 +66,6 @@ public class OnboardingActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // checking for last page
                 // if last page home screen will be launched
                 int current = getItem(+1);
                 if (current < layouts.length) {
