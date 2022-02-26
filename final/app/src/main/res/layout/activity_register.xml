@@ -37,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
             android:text="Once you register, you will not be able access your accounts without this passcode"
@@ -44,6 +45,13 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/slide_desc"
             />
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
     </LinearLayout>
 </RelativeLayout>
