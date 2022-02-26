@@ -1,5 +1,6 @@
 package com.mcgigglepop.blackbox.helpers;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Paint;
 
@@ -27,4 +28,6 @@ public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
             Color.BLACK,
             Color.GRAY
     };
+
+    ColorStateList mColorStates = new ColorStateList(mStates, mColors);
 }
