@@ -21,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if (prefManager.getRegistered()) {
-            startActivity(new Intent(RegisterActivity.this, Accounts.class));
+            startActivity(new Intent(RegisterActivity.this, AccountsActivity.class));
             finish();
         }
 
