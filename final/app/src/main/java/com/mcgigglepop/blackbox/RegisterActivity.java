@@ -20,6 +20,11 @@ public class RegisterActivity extends AppCompatActivity {
         prefManager = new SharedPreferenceManager(this);
         super.onCreate(savedInstanceState);
 
+        if (prefManager.getRegistered()) {
+            startActivity(new Intent(RegisterActivity.this, Accounts.class));
+            finish();
+        }
+
         setContentView(R.layout.activity_register);
 
         final CustomEditText editTextRegister = findViewById(R.id.edit_text_register);
