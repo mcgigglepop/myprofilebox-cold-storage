@@ -2,8 +2,10 @@ package com.mcgigglepop.blackbox.helpers;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.Editable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ActionMode;
@@ -113,5 +115,41 @@ public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
     @Override
     public void setCustomSelectionActionModeCallback(ActionMode.Callback actionModeCallback){
         throw new RuntimeException("setCustomSelectionActionModeCallback() not supported.");
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas){
+        int availableWidth = getWidth() - getPaddingRight() - getPaddingLeft();
+
+        if (mSpace < 0){
+            mCharSize = (availableWidth / (mNumChars * 2 - 1));
+        }else {
+            mCharSize = (availableWidth - (mSpace * (mNumChars - 1))) / mNumChars;
+        }
+
+        int startX = getPaddingLeft();
+        int bottom = getHeight() - getPaddingBottom();
+
+        //Text Width
+        Editable text = getText();
+        int textLength = text.length();
+        float[] textWidths = new float[textLength];
+        getPaint().getTextWidths(getText(), 0, textLength, textWidths);
+
+        for (int i = 0; i < mNumChars; i++) {
+            updateColorForLines(i == textLength);
+            canvas.drawLine(startX, bottom, startX + mCharSize, bottom, mLinesPaint);
+
+            if (getText().length() > i) {
+                float middle = startX + mCharSize / 2;
+                canvas.drawText(text, i, i + 1, middle - textWidths[0] / 2, bottom - mLineSpacing, getPaint());
+            }
+
+            if (mSpace < 0) {
+                startX += mCharSize * 2;
+            } else {
+                startX += mCharSize + mSpace;
+            }
+        }
     }
 }
