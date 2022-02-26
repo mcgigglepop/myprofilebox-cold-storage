@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mcgigglepop.blackbox.R;
+
 public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
 
     public static final String XML_NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";
