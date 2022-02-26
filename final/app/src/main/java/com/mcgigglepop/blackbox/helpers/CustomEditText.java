@@ -104,4 +104,14 @@ public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
             }
         });
     }
+
+    @Override
+    public void setOnClickListener(OnClickListener l){
+        mClickListener = l;
+    }
+
+    @Override
+    public void setCustomSelectionActionModeCallback(ActionMode.Callback actionModeCallback){
+        throw new RuntimeException("setCustomSelectionActionModeCallback() not supported.");
+    }
 }
