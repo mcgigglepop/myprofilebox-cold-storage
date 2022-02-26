@@ -9,10 +9,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.mcgigglepop.blackbox.helpers.CustomEditText;
+import com.mcgigglepop.blackbox.helpers.DatabaseHelper;
 import com.mcgigglepop.blackbox.helpers.SharedPreferenceManager;
 
 public class RegisterActivity extends AppCompatActivity {
     Button registerButton;
+    DatabaseHelper databaseHelper;
     private SharedPreferenceManager prefManager;
 
     @Override
@@ -30,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         final CustomEditText editTextRegister = findViewById(R.id.edit_text_register);
 
         registerButton = (Button) findViewById(R.id.register_button);
+        databaseHelper = new DatabaseHelper(RegisterActivity.this);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
