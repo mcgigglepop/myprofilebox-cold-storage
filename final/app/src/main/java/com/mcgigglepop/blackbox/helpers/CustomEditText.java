@@ -1,8 +1,10 @@
 package com.mcgigglepop.blackbox.helpers;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 
 public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
 
@@ -30,4 +32,18 @@ public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
     };
 
     ColorStateList mColorStates = new ColorStateList(mStates, mColors);
+
+    public CustomEditText(Context context){
+        super(context);
+    }
+
+    public CustomEditText(Context context, AttributeSet attrs){
+        super(context, attrs);
+        init(context, attrs);
+    }
+
+    public CustomEditText(Context context, AttributeSet attrs, int defStyleAttr){
+        super(context, attrs, defStyleAttr);
+        init(context, attrs);
+    }
 }
