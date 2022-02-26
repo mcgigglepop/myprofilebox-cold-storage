@@ -152,4 +152,21 @@ public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
             }
         }
     }
+
+    private int getColorForState(int... states) {
+        return mColorStates.getColorForState(states, Color.GRAY);
+    }
+
+    private void updateColorForLines(boolean next) {
+        if (isFocused()) {
+            mLinesPaint.setStrokeWidth(mLineStrokeSelected);
+            mLinesPaint.setColor(getColorForState(android.R.attr.state_focused));
+            if (next) {
+                mLinesPaint.setColor(getColorForState(android.R.attr.state_selected));
+            }
+        } else {
+            mLinesPaint.setStrokeWidth(mLineStroke);
+            mLinesPaint.setColor(getColorForState(-android.R.attr.state_focused));
+        }
+    }
 }
