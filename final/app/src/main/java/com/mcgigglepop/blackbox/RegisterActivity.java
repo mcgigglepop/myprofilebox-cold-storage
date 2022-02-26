@@ -9,13 +9,17 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.mcgigglepop.blackbox.helpers.CustomEditText;
+import com.mcgigglepop.blackbox.helpers.SharedPreferenceManager;
 
 public class RegisterActivity extends AppCompatActivity {
     Button registerButton;
+    private SharedPreferenceManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefManager = new SharedPreferenceManager(this);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_register);
 
         final CustomEditText editTextRegister = findViewById(R.id.edit_text_register);
