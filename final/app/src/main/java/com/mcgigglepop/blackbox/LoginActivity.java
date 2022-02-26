@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, AccountsActivity.class);
                     startActivity(intent);
                     finish();
-                } else{
-                    Toast.makeText(LoginActivity.this, "Incorrect Passcode", Toast.LENGTH_SHORT).show();
+                } else if (s.length() == "123456".length()) {
+                    Toast.makeText(LoginActivity.this, "Incorrect", Toast.LENGTH_SHORT).show();
                     editTextLogin.setText(null);
                 }
             }
