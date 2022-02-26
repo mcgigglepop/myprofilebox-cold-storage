@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Passcode must be 6 characters", Toast.LENGTH_LONG).show();
                 }else{
                     prefManager.setRegistered(true);
+                    databaseHelper.setPassword(editTextRegister.getText().toString());
                     startActivity(new Intent(RegisterActivity.this, AccountsActivity.class));
                     finish();
                 }
