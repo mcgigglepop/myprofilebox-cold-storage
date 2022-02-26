@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen">
+    android:background="#ffffff"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,19 +16,20 @@
             android:id="@+id/edit_text_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:cursorVisible="false"
             android:digits="1234567890"
             android:inputType="number"
             android:maxLength="6"
+            android:padding="30dp"
             android:textIsSelectable="false"
-            android:textSize="20sp"
-            android:layout_marginBottom="30dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />
 
@@ -39,8 +41,9 @@
             android:paddingRight="@dimen/desc_padding"
             android:text="Once you register, you will not be able access your accounts without this passcode"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/slide_desc" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/slide_desc"
+            />
 
     </LinearLayout>
 </RelativeLayout>

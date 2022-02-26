@@ -65,11 +65,11 @@ public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText{
 
         if (!isInEditMode()) {
             TypedValue outValue = new TypedValue();
-            mColors[0] = R.color.colorPrimaryDark;
+            mColors[0] = R.color.white;
 
-            mColors[1] = R.color.colorPrimaryDark;
+            mColors[1] = R.color.white;
 
-            mColors[2] = R.color.colorPrimaryDark;
+            mColors[2] = R.color.white;
         }
 
         setBackgroundResource(0);
