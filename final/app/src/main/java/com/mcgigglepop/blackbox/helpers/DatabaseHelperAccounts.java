@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.SQLException;
+import android.util.Log;
 
 public class DatabaseHelperAccounts {
 
@@ -65,5 +66,12 @@ public class DatabaseHelperAccounts {
         initialValues.put(KEY_PASSWORD, password);
 
         return db.insert(SQLITE_TABLE, null, initialValues);
+    }
+
+    public boolean deleteAllAccounts() {
+        int doneDelete = 0;
+        doneDelete = db.delete(SQLITE_TABLE, null , null);
+        Log.w(TAG, Integer.toString(doneDelete));
+        return doneDelete > 0;
     }
 }
