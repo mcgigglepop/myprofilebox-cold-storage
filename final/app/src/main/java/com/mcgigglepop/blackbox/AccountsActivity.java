@@ -40,5 +40,12 @@ public class AccountsActivity extends AppCompatActivity {
                 R.id.account_name,
                 R.id.username
         };
+
+        dataAdapter = new SimpleCursorAdapter(
+                this, R.layout.accounts_info,
+                cursor,
+                columns,
+                bound_fields,
+                0);
     }
 }
