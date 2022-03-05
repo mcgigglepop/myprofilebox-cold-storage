@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class DatabaseHelperAccounts {
 
-    public static final String KEY_ROWID = "rid";
+    public static final String KEY_ROWID = "_id";
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ACCOUNT_NAME = "account_name";
     public static final String KEY_USERNAME = "username";
