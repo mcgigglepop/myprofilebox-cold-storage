@@ -2,6 +2,7 @@ package com.mcgigglepop.blackbox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,9 +47,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                 else if(password.getText().toString().length() <= 0){
                     Toast.makeText(CreateAccountActivity.this, "Password must not be empty", Toast.LENGTH_LONG).show();
                 }else{
-                    //write to database
-                    //intent
-                    //finish
+                    //write to database and finish
+                    dbHelper.createAccount(account_type.getText().toString(), account_name.getText().toString(), username.getText().toString(), password.getText().toString());
+                    finish();
                 }
             }
         });
