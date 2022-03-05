@@ -23,7 +23,7 @@
         android:textSize="@dimen/slide_desc"
         />
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/account_type_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -32,7 +32,16 @@
         android:layout_marginBottom="15dp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/account_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Account Name"
+        android:layout_marginBottom="15dp"  />
+
+    <EditText
+        android:id="@+id/account_username_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -41,7 +50,7 @@
         android:layout_marginBottom="15dp" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/account_password_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

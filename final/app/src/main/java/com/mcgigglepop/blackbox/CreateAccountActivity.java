@@ -19,7 +19,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         confirm_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+
             }
         });
     }
