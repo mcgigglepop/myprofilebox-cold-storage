@@ -13,6 +13,7 @@ public class DatabaseHelperAccounts {
     private static final String DATABASE_NAME = "table";
     private static final String SQLITE_TABLE = "records";
     private static final int DATABASE_VERSION =  1;
+    private static final String TAG = "DatabaseHelperAccounts";
 
     private final Context context;
 
@@ -23,6 +24,10 @@ public class DatabaseHelperAccounts {
 
         DatabaseHelperAccounts(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        }
+
+        @Override
+        public void onCreate() {
         }
     }
 }
