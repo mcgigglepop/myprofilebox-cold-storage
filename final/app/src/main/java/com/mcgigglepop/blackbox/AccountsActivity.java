@@ -22,6 +22,6 @@ public class AccountsActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelperAccounts(this);
         dbHelper.open();
 
-
+        displayListView();
     }
 }
