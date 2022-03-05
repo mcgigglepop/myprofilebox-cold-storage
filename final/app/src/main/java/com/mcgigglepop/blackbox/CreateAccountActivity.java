@@ -30,14 +30,16 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if(account_type.getText().toString().length() <= 0){
                     Toast.makeText(CreateAccountActivity.this, "Account Type must not be empty", Toast.LENGTH_LONG).show();
                 }
-                if(account_name.getText().toString().length() <= 0){
+                else if(account_name.getText().toString().length() <= 0){
                     Toast.makeText(CreateAccountActivity.this, "Account Name must not be empty", Toast.LENGTH_LONG).show();
                 }
-                if(username.getText().toString().length() <= 0){
+                else if(username.getText().toString().length() <= 0){
                     Toast.makeText(CreateAccountActivity.this, "Username must not be empty", Toast.LENGTH_LONG).show();
                 }
-                if(password.getText().toString().length() <= 0){
+                else if(password.getText().toString().length() <= 0){
                     Toast.makeText(CreateAccountActivity.this, "Password must not be empty", Toast.LENGTH_LONG).show();
+                }else{
+
                 }
             }
         });
