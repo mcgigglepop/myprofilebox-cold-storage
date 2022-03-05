@@ -28,5 +28,17 @@ public class AccountsActivity extends AppCompatActivity {
 
     private void displayListView(){
         Cursor cursor = dbHelper.fetchAllAccounts();
+
+        String[] columns = new String[] {
+                DatabaseHelperAccounts.KEY_ACCOUNT_TYPE,
+                DatabaseHelperAccounts.KEY_ACCOUNT_NAME,
+                DatabaseHelperAccounts.KEY_USERNAME
+        };
+
+        int[] bound_fields = new int[] {
+                R.id.account_type,
+                R.id.account_name,
+                R.id.username
+        };
     }
 }
