@@ -2,6 +2,7 @@ package com.mcgigglepop.blackbox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
@@ -23,5 +24,9 @@ public class AccountsActivity extends AppCompatActivity {
         dbHelper.open();
 
         displayListView();
+    }
+
+    private void displayListView(){
+        Cursor cursor = dbHelper.fetchAllAccounts();
     }
 }
