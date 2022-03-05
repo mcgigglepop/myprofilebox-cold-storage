@@ -2,6 +2,7 @@ package com.mcgigglepop.blackbox.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.SQLException;
@@ -82,5 +83,26 @@ public class DatabaseHelperAccounts {
         doneDelete = db.delete(SQLITE_TABLE, null , null);
         Log.w(TAG, Integer.toString(doneDelete));
         return doneDelete > 0;
+    }
+
+    public Cursor fetchAccountsByName(String inputText) throws SQLException {
+        Log.w(TAG, inputText);
+        Cursor mCursor = null;
+        if (inputText == null  ||  inputText.length () == 0)  {
+            mCursor = db.query(SQLITE_TABLE, new String[] {KEY_ROWID,
+                            KEY_ACCOUNT_TYPE, KEY_ACCOUNT_NAME, KEY_USERNAME, KEY_PASSWORD},
+                    null, null, null, null, null);
+
+        }
+        else {
+            mCursor = db.query(true, SQLITE_TABLE, new String[] {KEY_ROWID,
+                            KEY_ACCOUNT_TYPE, KEY_ACCOUNT_NAME, KEY_USERNAME, KEY_PASSWORD},
+                    KEY_NAME + " like '%" + inputText + "%'", null,
+                    null, null, null, null);
+        }
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
     }
 }
