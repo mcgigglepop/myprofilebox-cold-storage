@@ -97,7 +97,7 @@ public class DatabaseHelperAccounts {
         else {
             mCursor = db.query(true, SQLITE_TABLE, new String[] {KEY_ROWID,
                             KEY_ACCOUNT_TYPE, KEY_ACCOUNT_NAME, KEY_USERNAME, KEY_PASSWORD},
-                    KEY_NAME + " like '%" + inputText + "%'", null,
+                    KEY_ACCOUNT_NAME + " like '%" + inputText + "%'", null,
                     null, null, null, null);
         }
         if (mCursor != null) {
