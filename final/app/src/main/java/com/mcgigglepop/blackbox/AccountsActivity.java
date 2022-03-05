@@ -2,12 +2,14 @@ package com.mcgigglepop.blackbox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
@@ -21,6 +23,7 @@ import com.mcgigglepop.blackbox.helpers.DatabaseHelperAccounts;
 public class AccountsActivity extends AppCompatActivity {
     private DatabaseHelperAccounts dbHelper;
     private SimpleCursorAdapter dataAdapter;
+    Button createAccountButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,15 @@ public class AccountsActivity extends AppCompatActivity {
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
                 return dbHelper.fetchAccountsByName(constraint.toString());
+            }
+        });
+
+        createAccountButton = (Button) findViewById(R.id.button);
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AccountsActivity.this, CreateAccountActivity.class));
+                finish();
             }
         });
 
