@@ -31,7 +31,7 @@ public class DatabaseHelperAccounts {
                     KEY_ACCOUNT_TYPE + "," +
                     KEY_ACCOUNT_NAME + "," +
                     KEY_USERNAME + "," +
-                    KEY_PASSWORD + "," +
+                    KEY_PASSWORD +
                     ");";
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
