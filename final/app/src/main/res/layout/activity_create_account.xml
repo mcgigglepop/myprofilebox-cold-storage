@@ -50,7 +50,7 @@
         android:layout_marginBottom="15dp"/>
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/confirm_create_account_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
