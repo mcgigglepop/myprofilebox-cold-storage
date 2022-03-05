@@ -103,7 +103,6 @@ public class AccountsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AccountsActivity.this, CreateAccountActivity.class));
-                finish();
             }
         });
 
