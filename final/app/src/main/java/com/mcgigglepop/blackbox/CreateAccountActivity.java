@@ -8,14 +8,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.mcgigglepop.blackbox.helpers.DatabaseHelperAccounts;
+
 public class CreateAccountActivity extends AppCompatActivity {
     Button confirm_account;
     EditText account_type, account_name, username, password;
+    private DatabaseHelperAccounts dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        dbHelper = new DatabaseHelperAccounts(this);
+        dbHelper.open();
 
         confirm_account = (Button) findViewById(R.id.confirm_create_account_button);
 
@@ -39,7 +46,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                 else if(password.getText().toString().length() <= 0){
                     Toast.makeText(CreateAccountActivity.this, "Password must not be empty", Toast.LENGTH_LONG).show();
                 }else{
-
+                    //write to database
+                    //intent
+                    //finish
                 }
             }
         });
