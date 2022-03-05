@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -47,5 +50,24 @@ public class AccountsActivity extends AppCompatActivity {
                 columns,
                 bound_fields,
                 0);
+
+        ListView listView = (ListView) findViewById(R.id.listView1);
+        listView.setAdapter(dataAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> listView, View view,
+                                    int position, long id) {
+                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
+
+                // Get the state's capital from this row in the database.
+                String countryCode =
+                        cursor.getString(cursor.getColumnIndexOrThrow("password"));
+                Toast.makeText(getApplicationContext(),
+                        countryCode, Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
+
 }
