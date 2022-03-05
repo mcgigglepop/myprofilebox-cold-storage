@@ -31,7 +31,8 @@ public class DatabaseHelperAccounts {
                     KEY_ACCOUNT_TYPE + "," +
                     KEY_ACCOUNT_NAME + "," +
                     KEY_USERNAME + "," +
-                    KEY_PASSWORD + "," + ");";
+                    KEY_PASSWORD + "," +
+                    ");";
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -100,6 +101,17 @@ public class DatabaseHelperAccounts {
                     KEY_ACCOUNT_NAME + " like '%" + inputText + "%'", null,
                     null, null, null, null);
         }
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
+    public Cursor fetchAllAccounts() {
+        Cursor mCursor = db.query(SQLITE_TABLE, new String[] {KEY_ROWID,
+                        KEY_ACCOUNT_TYPE, KEY_ACCOUNT_NAME, KEY_USERNAME, KEY_PASSWORD},
+                null, null, null, null, null);
+
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
