@@ -27,7 +27,12 @@ public class DatabaseHelperAccounts {
         }
 
         @Override
-        public void onCreate() {
+        public void onCreate(SQLiteDatabase db) {
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            onCreate(db);
         }
     }
 }
