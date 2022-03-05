@@ -2,6 +2,8 @@ package com.mcgigglepop.blackbox.helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.SQLException;
 
 public class DatabaseHelperAccounts {
 
@@ -20,9 +22,9 @@ public class DatabaseHelperAccounts {
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
 
-    private static class DatabaseHelperAccounts extends SQLiteOpenHelper {
+    private static class DatabaseHelper extends SQLiteOpenHelper {
 
-        DatabaseHelperAccounts(Context context) {
+        DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
@@ -33,6 +35,22 @@ public class DatabaseHelperAccounts {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             onCreate(db);
+        }
+    }
+
+    public DatabaseHelperAccounts(Context context) {
+        this.context = context;
+    }
+
+    public DatabaseHelperAccounts open() throws SQLException {
+        dbHelper = new DatabaseHelper(context);
+        db = dbHelper.getWritableDatabase();
+        return this;
+    }
+
+    public void close() {
+        if (dbHelper != null) {
+            dbHelper.close();
         }
     }
 }
