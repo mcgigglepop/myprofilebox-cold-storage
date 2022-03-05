@@ -9,9 +9,9 @@ import android.util.Log;
 
 public class DatabaseHelperAccounts {
 
-    public static final String KEY_ROWID = "_id";
-    public static final String KEY_ACCOUNT_TYPE = "atype";
-    public static final String KEY_ACCOUNT_NAME = "aname";
+    public static final String KEY_ROWID = "rid";
+    public static final String KEY_ACCOUNT_TYPE = "account_type";
+    public static final String KEY_ACCOUNT_NAME = "account_name";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     private static final String DATABASE_NAME = "table";
@@ -23,6 +23,14 @@ public class DatabaseHelperAccounts {
 
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
+
+    private static final String DATABASE_CREATE =
+            "CREATE TABLE if not exists " + SQLITE_TABLE + " (" +
+                    KEY_ROWID + " integer PRIMARY KEY autoincrement," +
+                    KEY_ACCOUNT_TYPE + "," +
+                    KEY_ACCOUNT_NAME + "," +
+                    KEY_USERNAME + "," +
+                    KEY_PASSWORD + "," + ");";
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
 
