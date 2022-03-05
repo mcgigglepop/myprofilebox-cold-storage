@@ -108,4 +108,9 @@ public class AccountsActivity extends AppCompatActivity {
 
     }
 
+    public void onResume() {
+        super.onResume();
+        displayListView();
+    }
+
 }
