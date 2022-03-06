@@ -67,11 +67,14 @@ public class AccountsActivity extends AppCompatActivity {
                                     int position, long id) {
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-                // Get the state's capital from this row in the database.
-                String countryCode =
-                        cursor.getString(cursor.getColumnIndexOrThrow("password"));
-                Toast.makeText(getApplicationContext(),
-                        countryCode, Toast.LENGTH_SHORT).show();
+                String account_type = cursor.getString(cursor.getColumnIndexOrThrow("account_type"));
+                String account_name = cursor.getString(cursor.getColumnIndexOrThrow("account_name"));
+                String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+                String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
+
+
+
+                
 
             }
         });
