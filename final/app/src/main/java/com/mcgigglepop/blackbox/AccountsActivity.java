@@ -80,7 +80,6 @@ public class AccountsActivity extends AppCompatActivity {
                 b.putString("password", password);
                 intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
-                finish();
 
 
             }
