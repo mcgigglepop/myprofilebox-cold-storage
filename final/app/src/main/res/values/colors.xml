@@ -22,6 +22,7 @@
     <color name="bg_screen">#282728</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="yellow">#ffe800</color>
+    <color name="profileAccentColor">#f7f7f7</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>

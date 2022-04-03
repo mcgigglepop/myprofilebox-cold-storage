@@ -1,75 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    android:padding="8dp">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:paddingLeft="@dimen/desc_padding"
-        android:paddingRight="@dimen/desc_padding"
-        android:text="Account Details"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/slide_desc"
-        />
-    <TextView
-        android:id="@+id/account_type_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="@dimen/desc_padding"
-        android:paddingRight="@dimen/desc_padding"
-        android:text="Account Type"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/slide_desc"
-        />
-    <TextView
-        android:id="@+id/account_name_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="@dimen/desc_padding"
-        android:paddingRight="@dimen/desc_padding"
-        android:text="Account Name"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/slide_desc"
-        />
-    <TextView
-        android:id="@+id/username_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="@dimen/desc_padding"
-        android:paddingRight="@dimen/desc_padding"
-        android:text="Username"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/slide_desc"
-        />
-    <TextView
-        android:id="@+id/password_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="@dimen/desc_padding"
-        android:paddingRight="@dimen/desc_padding"
-        android:text="Password"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/slide_desc"
-        />
+    tools:context="com.mcgigglepop.blackbox.AccountDetails"
+    android:background="#fff">
 
-</LinearLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="#FF3B30"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextAppearance="@style/TransparentText">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout"
+                android:background="@drawable/account_background">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/user" />
+
+                <TextView
+                    android:id="@+id/account_name_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Account Name"
+                    android:textSize="28dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/account_type_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="account type"
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="20dp"
+                    android:background="#fff">
+
+                    <View
+                        android:layout_alignParentTop="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/account_background"/>
+
+                    <TextView
+                        android:id="@+id/share_account_button"
+                        android:text="Share this Account"
+                        style="@style/accountShareButton" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_profile" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
