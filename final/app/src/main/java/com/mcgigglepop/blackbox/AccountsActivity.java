@@ -74,12 +74,19 @@ public class AccountsActivity extends AppCompatActivity {
                 String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
                 String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
 
+                String decrypted = "";
+                try {
+                    decrypted = AESUtils.decrypt(password);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 Intent intent = new Intent(AccountsActivity.this, AccountDetails.class);
                 Bundle b = new Bundle();
                 b.putString("account_type", account_type);
                 b.putString("account_name", account_name);
                 b.putString("username", username);
-                b.putString("password", password);
+                b.putString("password", decrypted);
                 intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
             }
