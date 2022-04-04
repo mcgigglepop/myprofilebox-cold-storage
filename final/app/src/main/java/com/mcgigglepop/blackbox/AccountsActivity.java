@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.mcgigglepop.blackbox.helpers.AESUtils;
 import com.mcgigglepop.blackbox.helpers.DatabaseHelperAccounts;
 
 public class AccountsActivity extends AppCompatActivity {
@@ -80,8 +82,6 @@ public class AccountsActivity extends AppCompatActivity {
                 b.putString("password", password);
                 intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
-
-
             }
         });
 

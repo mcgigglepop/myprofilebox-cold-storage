@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.mcgigglepop.blackbox.helpers.AESUtils;
 import com.mcgigglepop.blackbox.helpers.DatabaseHelperAccounts;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -47,8 +49,14 @@ public class CreateAccountActivity extends AppCompatActivity {
                 else if(password.getText().toString().length() <= 0){
                     Toast.makeText(CreateAccountActivity.this, "Password must not be empty", Toast.LENGTH_LONG).show();
                 }else{
-                    //write to database and finish
-                    dbHelper.createAccount(account_type.getText().toString(), account_name.getText().toString(), username.getText().toString(), password.getText().toString());
+                    String encrypted = "";
+                    String sourceStr = password.getText().toString();
+                    try {
+                        encrypted = AESUtils.encrypt(sourceStr);
+                        dbHelper.createAccount(account_type.getText().toString(), account_name.getText().toString(), username.getText().toString(), encrypted);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     finish();
                 }
             }
