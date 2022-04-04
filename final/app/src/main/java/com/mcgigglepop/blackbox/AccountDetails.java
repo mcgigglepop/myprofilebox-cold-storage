@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AccountDetails extends AppCompatActivity {
 
@@ -35,6 +37,16 @@ public class AccountDetails extends AppCompatActivity {
         account_type_textview.setText(account_type);
         username_textview.setText(username);
         password_textview.setText(password);
+
+        TextView shareTextView = (TextView) findViewById(R.id.share_account_button);
+        shareTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AccountDetails.this, "Share Account",
+                        Toast.LENGTH_LONG).show();
+
+            }
+        });
 
     }
 

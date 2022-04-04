@@ -75,7 +75,9 @@
                     <TextView
                         android:id="@+id/share_account_button"
                         android:text="Share this Account"
-                        style="@style/accountShareButton" />
+                        style="@style/accountShareButton"
+                        android:clickable="true"
+                        />
                 </RelativeLayout>
 
             </LinearLayout>
