@@ -3,12 +3,12 @@ import json
 import boto3
 
 def lambda_handler(event, context):
-    bucket = event['bucket']
-    key = event['key']
-    
+    print("SEND TEXT MESSAGE")
+    print(event)
+
     result = {
-        "bucket": bucket,
-        "key": key
+        "step": 5,
+        "state": "send text message"
     }
 
     response = json.dumps(result)

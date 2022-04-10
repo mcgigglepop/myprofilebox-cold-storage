@@ -3,12 +3,12 @@ import json
 import boto3
 
 def lambda_handler(event, context):
-    bucket = event['bucket']
-    key = event['key']
-    
+    print("CREATE DYNAMO RECORD")
+    print(event)
+
     result = {
-        "bucket": bucket,
-        "key": key
+        "step": 4,
+        "state": "create dynamo record"
     }
 
     response = json.dumps(result)
