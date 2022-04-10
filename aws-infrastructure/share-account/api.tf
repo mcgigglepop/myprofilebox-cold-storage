@@ -102,3 +102,13 @@ resource "aws_api_gateway_integration_response" "cors_integration_response_encry
     "method.response.header.Access-Control-Allow-Origin" = "'*'"
   }
 }
+
+# API Gateway usage plan
+resource "aws_api_gateway_usage_plan" "usage_plan" {
+  name = "${var.project}_usage_plan"
+
+  api_stages {
+    api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+    stage  = "${aws_api_gateway_deployment.deployment.stage_name}"
+  }
+}
