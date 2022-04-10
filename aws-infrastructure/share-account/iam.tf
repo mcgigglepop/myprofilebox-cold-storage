@@ -105,6 +105,15 @@ resource "aws_iam_policy" "create_dynamo_record_lambda_policy" {
       "Resource": "arn:aws:logs:*:*:*",
       "Effect": "Allow",
       "Sid": "VisualEditor0"
+    },
+    {
+      "Action": [
+          "dynamodb:UpdateItem"
+      ],
+      "Resource": [
+          "${aws_dynamodb_table.dynamodb_table.arn}",
+      ],
+      "Effect": "Allow"
     }
   ]
 }
