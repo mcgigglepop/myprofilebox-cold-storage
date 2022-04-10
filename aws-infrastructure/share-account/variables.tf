@@ -10,7 +10,7 @@ variable "aws_credential_profile" {
 
 variable "profile" {
   description = "AWS Profile Name"
-  default = "default"
+  default = "management"
 }
 
 variable "project" {
