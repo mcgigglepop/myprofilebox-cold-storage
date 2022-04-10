@@ -52,9 +52,9 @@ resource "aws_sfn_state_machine" "sfn_state_machine" {
   definition = <<EOF
 {
   "Comment": "Execution workflow for Sharing an Account",
-  "StartAt": "Encrypt Secret",
+  "StartAt": "Share Account",
   "States": {
-    "Generate Documents": {
+    "Share Account": {
       "Type": "Parallel",
       "Branches": [
         {
