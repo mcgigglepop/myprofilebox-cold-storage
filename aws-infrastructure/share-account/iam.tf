@@ -16,6 +16,12 @@ resource "aws_iam_policy" "encrypt_secret_lambda_policy" {
       "Resource": "arn:aws:logs:*:*:*",
       "Effect": "Allow",
       "Sid": "VisualEditor0"
+    },
+    {
+      "Action": "kms:Encrypt",
+      "Resource": "${aws_kms_key.kms_resource.arn}",
+      "Effect": "Allow",
+      "Sid": "VisualEditor1"
     }
   ]
 }
