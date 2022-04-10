@@ -68,3 +68,22 @@ resource "aws_api_gateway_integration" "cors_integration_encrypt" {
 EOF
   }
 }
+
+# CORS Method Response for the encrypt Endpoint
+resource "aws_api_gateway_method_response" "cors_method_response_encrypt" {
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id = "${aws_api_gateway_resource.encrypt_resource.id}"
+  http_method = "${aws_api_gateway_method.cors_method_encrypt.http_method}"
+
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true,
+    "method.response.header.Access-Control-Allow-Methods" = true,
+    "method.response.header.Access-Control-Allow-Origin" = true
+  }
+}
