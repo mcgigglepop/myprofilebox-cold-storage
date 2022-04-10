@@ -21,6 +21,9 @@ module "trigger-sfn-lambda" {
   lambda_role_name        = "trigger-sfn-lambda-role"
   lambda_role_description = "role for trigger state machine lambda"
   depends_on              = [data.archive_file.create_dist_pkg]
+  environment_variables   = {
+    "SFN_ARN" = "${aws_sfn_state_machine.sfn_state_machine.arn}"
+  }
 }
 
 # Lambda Module for Encrypt Secret
