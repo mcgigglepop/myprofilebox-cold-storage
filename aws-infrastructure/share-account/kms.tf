@@ -5,7 +5,7 @@ resource "aws_kms_key" "kms_resource" {
 
 // alias for the kms key
 resource "aws_kms_alias" "kms_resource" {
-  name          = "alias/kms_key_alias"
+  name          = "alias/${var.project}_kms_key_alias"
   target_key_id = "${aws_kms_key.kms_resource.key_id}"
 }
 
