@@ -40,6 +40,9 @@ module "encrypt-secret-lambda" {
   lambda_role_name        = "encrypt-secret-lambda-role"
   lambda_role_description = "role for encrypt secret lambda"
   depends_on              = [data.archive_file.create_dist_pkg]
+  environment_variables   = {
+    "KMS_ALIAS" = "${aws_kms_key.kms_resource.id}"
+  }
 }
 
 # Lambda Module for Store in S3
