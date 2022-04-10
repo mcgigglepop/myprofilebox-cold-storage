@@ -16,8 +16,7 @@ def lambda_handler(event, context):
     phone_number = event["phone_number"]
 
     # store encrypted secret in s3
-    encoded_password_string = encoded_password.decode("utf-8")
-    s3.Bucket(bucket_name).put_object(Key=record_id, Body=encoded_password_string)
+    s3.Bucket(bucket_name).put_object(Key=record_id, Body=encoded_password)
     
 
     result = {

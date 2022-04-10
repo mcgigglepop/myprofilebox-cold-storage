@@ -25,10 +25,11 @@ def lambda_handler(event, context):
 
     # encrypted password blob
     encoded_password = base64.b64encode(ciphertext["CiphertextBlob"])
+    encoded_password_string = encoded_password.decode("utf-8")
 
     result = {
         "record_id": record_id,
-        "encoded_password": encoded_password,
+        "encoded_password": encoded_password_string,
         "account_type": account_type,
         "account_username": account_username,
         "account_name": account_name,
