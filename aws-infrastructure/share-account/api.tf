@@ -117,3 +117,10 @@ resource "aws_api_gateway_usage_plan" "usage_plan" {
 resource "aws_api_gateway_api_key" "auth_key" {
   name = "${var.project}_auth_key"
 }
+
+# API Gateway key usage plan
+resource "aws_api_gateway_usage_plan_key" "auth_key_usage_plan" {
+  key_id        = "${aws_api_gateway_api_key.auth_key.id}"
+  key_type      = "API_KEY"
+  usage_plan_id = "${aws_api_gateway_usage_plan.usage_plan.id}"
+}
