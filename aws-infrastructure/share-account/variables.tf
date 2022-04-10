@@ -1,0 +1,19 @@
+variable "aws_region" {
+  description = "Specified AWS Region"
+  default = "us-east-1"
+}
+
+variable "aws_credential_profile" {
+  description = "AWS Profile location"
+  default = "~/.aws/credentials"
+}
+
+variable "profile" {
+  description = "AWS Profile Name"
+  default = "default"
+}
+
+variable "project" {
+  description = "Project Name"
+  default = "blackbox"
+}
