@@ -16,3 +16,24 @@ resource "aws_iam_role" "iam_for_sfn" {
 }
 EOF
 }
+
+# Policy for invoking lambdas
+resource "aws_iam_policy" "policy_invoke_lambda" {
+  name        = "${var.project}-sfn-lambda-invocation-role"
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:InvokeFunction",
+                "lambda:InvokeAsync"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
