@@ -87,3 +87,18 @@ resource "aws_api_gateway_method_response" "cors_method_response_encrypt" {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 }
+
+# CORS Integration Response for the encrypt Endpoint
+resource "aws_api_gateway_integration_response" "cors_integration_response_encrypt" {
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id = "${aws_api_gateway_method.cors_method_encrypt.resource_id}"
+  http_method = "${aws_api_gateway_method.cors_method_encrypt.http_method}"
+
+  status_code = "${aws_api_gateway_method_response.cors_method_response_encrypt.status_code}"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'",
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+}
