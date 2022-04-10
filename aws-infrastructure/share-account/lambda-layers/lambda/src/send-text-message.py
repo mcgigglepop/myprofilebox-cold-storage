@@ -1,14 +1,23 @@
-from doctest import master
 import json
 import boto3
+import os
 
 def lambda_handler(event, context):
-    print("SEND TEXT MESSAGE")
-    print(event)
+    # top-level variables
+    sns = boto3.client('sns')
 
+    # inputs
+    record_id = event["record_id"]
+    mfa = event["mfa"]
+    phone_number = event["phone_number"]
+
+    # send text
+    number = phone_number
+    message = "Blackbox message. Use MFA code " + mfa + " to retrieve your secret \n\n https://blackbox.com/view/"+ record_id
+    sns.publish(PhoneNumber = number, Message=message )
+    
     result = {
-        "step": 5,
-        "state": "send text message"
+        "status": "complete"
     }
 
     response = json.dumps(result)
