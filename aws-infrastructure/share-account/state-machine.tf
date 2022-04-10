@@ -43,3 +43,101 @@ resource "aws_iam_role_policy_attachment" "iam_for_sfn_attach_policy_invoke_lamb
   role       = aws_iam_role.iam_for_sfn.name
   policy_arn = aws_iam_policy.policy_invoke_lambda.arn
 }
+
+// State Machine for Sharing Accounts
+resource "aws_sfn_state_machine" "sfn_state_machine" {
+  name     = "${var.project}-share-account-state-machine"
+  role_arn = aws_iam_role.iam_for_sfn.arn
+
+  definition = <<EOF
+{
+  "Comment": "Execution workflow for Sharing an Account",
+  "StartAt": "Encrypt Secret",
+  "States": {
+    "Generate Documents": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "Encrypt Secret",
+          "States": {
+            "Encrypt Secret": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "FunctionName": "${module.encrypt-secret-lambda.arn}",
+                "Payload.$": "$"
+              },
+              "Next": "Store in S3"
+            },
+            "Store in S3": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "FunctionName": "${module.store-in-s3-lambda.arn}",
+                "Payload.$": "$"
+              },
+              "Next": "Generate MFA"
+            },
+            "Generate MFA": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "FunctionName": "${module.generate-mfa-lambda.arn}",
+                "Payload.$": "$"
+              },
+              "Next": "Create Dynamo Record"
+            },
+            "Create Dynamo Record": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "FunctionName": "${module.create-dynamo-record-lambda.arn}",
+                "Payload.$": "$"
+              },
+              "Next": "Send Text Message"
+            },
+            "Send Text Message": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "FunctionName": "${module.send-text-message-lambda.arn}",
+                "Payload.$": "$"
+              },
+              "End": true
+            }
+          }
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "ResultPath": "$.error",
+          "Next": "Send Failure Message"
+        }
+      ],
+      "Next": "Job Succeeded"
+    },
+    "Job Succeeded": {
+      "Type": "Succeed"
+    },
+    "Send Failure Message": {
+      "Type": "Pass",
+      "Next": "Fail Workflow"
+    },
+    "Fail Workflow": {
+      "Type": "Fail"
+    }
+  }
+}
+EOF
+
+  depends_on = ["module.encrypt-secret-lambda","module.store-in-s3-lambda.arn","module.generate-mfa-lambda.arn","module.create-dynamo-record-lambda.arn","module.send-text-message-lambda.arn"]
+
+}
