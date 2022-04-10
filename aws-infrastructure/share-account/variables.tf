@@ -17,3 +17,8 @@ variable "project" {
   description = "Project Name"
   default = "blackbox"
 }
+
+variable "stage" {
+  description = "api gateway stage name"
+  default = "dev"
+}
