@@ -8,14 +8,18 @@ def lambda_handler(event, context):
     try:
         sfn = boto3.client('stepfunctions') 
        
+        record_id = uuid.uuid4().hex
+        
         payload = {
-            "item" : "item",
-            "key": "key"
+            "record_id": record_id,
+            "password": "password",
+            "account": "account",
+            "username": "username"
         }
 
         sfn.start_execution(
             stateMachineArn=str(os.environ['SFN_ARN']),
-            name=str(uuid.uuid4().hex),
+            name=str(record_id),
             input=json.dumps(payload)
         )
 
