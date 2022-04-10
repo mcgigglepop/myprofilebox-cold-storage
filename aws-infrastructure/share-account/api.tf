@@ -104,6 +104,101 @@ resource "aws_api_gateway_integration_response" "cors_integration_response_encry
   }
 }
 
+##############################################################
+# decrypt Resource
+resource "aws_api_gateway_resource" "decrypt_resource" {
+  path_part   = "decrypt"
+  parent_id   = "${aws_api_gateway_rest_api.api_gateway.root_resource_id}"
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+}
+
+# decrypt Method
+resource "aws_api_gateway_method" "decrypt_method" {
+  rest_api_id   = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id   = "${aws_api_gateway_resource.encrypt_resource.id}"
+  http_method   = "POST"
+  authorization = "NONE"
+  api_key_required = true
+}
+
+# Method Integration
+resource "aws_api_gateway_integration" "decrypt_integration" {
+  rest_api_id             = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id             = "${aws_api_gateway_resource.decrypt_resource.id}"
+  http_method             = "${aws_api_gateway_method.decrypt_method.http_method}"
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = "${module.decrypt-lambda.invoke_arn}"
+  
+  request_parameters = {
+    "integration.request.header.X-Authorization" = "'static'"
+  }
+
+  # Transforms the incoming XML request to JSON
+  request_templates = {
+    "application/xml" = <<EOF
+{
+   "body" : $input.json('$')
+}
+EOF
+  }
+}
+
+# CORS OPTIONS Method for the decrypt Endpoint
+resource "aws_api_gateway_method" "cors_method_decrypt" {
+  rest_api_id   = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id   = "${aws_api_gateway_resource.decrypt_resource.id}"
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+# CORS Integration for the decrypt Endpoint
+resource "aws_api_gateway_integration" "cors_integration_decrypt" {
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id = "${aws_api_gateway_resource.decrypt_resource.id}"
+  http_method = "${aws_api_gateway_method.cors_method_decrypt.http_method}"
+  type                    = "MOCK"
+  request_templates = {
+    "application/json" = <<EOF
+{ "statusCode": 200 }
+EOF
+  }
+}
+
+# CORS Method Response for the decrypt Endpoint
+resource "aws_api_gateway_method_response" "cors_method_response_decrypt" {
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id = "${aws_api_gateway_resource.decrypt_resource.id}"
+  http_method = "${aws_api_gateway_method.cors_method_decrypt.http_method}"
+
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true,
+    "method.response.header.Access-Control-Allow-Methods" = true,
+    "method.response.header.Access-Control-Allow-Origin" = true
+  }
+}
+
+# CORS Integration Response for the decrypt Endpoint
+resource "aws_api_gateway_integration_response" "cors_integration_response_decrypt" {
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id = "${aws_api_gateway_method.cors_method_decrypt.resource_id}"
+  http_method = "${aws_api_gateway_method.cors_method_decrypt.http_method}"
+
+  status_code = "${aws_api_gateway_method_response.cors_method_response_decrypt.status_code}"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'",
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+}
+##############################################################
 # API Gateway usage plan
 resource "aws_api_gateway_usage_plan" "usage_plan" {
   name = "${var.project}_usage_plan"
