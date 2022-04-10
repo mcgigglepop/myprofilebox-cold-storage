@@ -5,16 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.contentcapture.DataRemovalRequest;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.mcgigglepop.blackbox.helpers.CustomEditText;
 import com.mcgigglepop.blackbox.helpers.DatabaseHelper;
+import com.mcgigglepop.blackbox.helpers.DatabaseHelperAccounts;
 import com.mcgigglepop.blackbox.helpers.SharedPreferenceManager;
 
 public class RegisterActivity extends AppCompatActivity {
     Button registerButton;
     DatabaseHelper databaseHelper;
+    DatabaseHelperAccounts databaseHelperAccounts;
     private SharedPreferenceManager prefManager;
 
     @Override
@@ -40,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(editTextRegister.getText().toString().length() != 6){
                     Toast.makeText(RegisterActivity.this, "Passcode must be 6 characters", Toast.LENGTH_LONG).show();
                 }else{
+                    databaseHelperAccounts.deleteAllAccounts();
                     prefManager.setRegistered(true);
                     databaseHelper.setPassword(editTextRegister.getText().toString());
                     startActivity(new Intent(RegisterActivity.this, AccountsActivity.class));
