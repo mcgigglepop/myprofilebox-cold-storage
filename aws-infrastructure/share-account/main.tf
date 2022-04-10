@@ -7,6 +7,22 @@ provider "aws" {
 # AWS Caller Identity
 data "aws_caller_identity" "current" {}
 
+# Lambda Module for Triggering the State Machine
+module "trigger-sfn-lambda" {
+  source                  = "./modules/lambda"
+  function_name           = "${var.project}-trigger-sfn"
+  description             = "lambda to send text message"
+  handler                 = "trigger-sfn.lambda_handler"
+  runtime                 = "python3.7"
+  memory                  = 128
+  timeout                 = 300
+  output_base64sha256     = data.archive_file.create_dist_pkg.output_base64sha256
+  output_path             = data.archive_file.create_dist_pkg.output_path
+  lambda_role_name        = "trigger-sfn-lambda-role"
+  lambda_role_description = "role for trigger state machine lambda"
+  depends_on              = [data.archive_file.create_dist_pkg]
+}
+
 # Lambda Module for Encrypt Secret
 module "encrypt-secret-lambda" {
   source                  = "./modules/lambda"
