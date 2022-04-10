@@ -46,6 +46,17 @@ resource "aws_iam_policy" "store_in_s3_lambda_policy" {
       "Resource": "arn:aws:logs:*:*:*",
       "Effect": "Allow",
       "Sid": "VisualEditor0"
+    },
+    {
+      "Action": [
+          "s3:PutObject"
+      ],
+      "Resource": [
+          "${aws_s3_bucket.s3_bucket.arn}",
+          "${aws_s3_bucket.s3_bucket.arn}/*"
+      ],
+      "Effect": "Allow",
+      "Sid": "VisualEditor1"
     }
   ]
 }
