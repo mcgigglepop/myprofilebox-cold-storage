@@ -59,6 +59,9 @@ module "store-in-s3-lambda" {
   lambda_role_name        = "store-in-s3-lambda-role"
   lambda_role_description = "role for store encrypted object in s3 lambda"
   depends_on              = [data.archive_file.create_dist_pkg]
+  environment_variables   = {
+    "S3_BUCKET" = "${aws_s3_bucket.s3_bucket.id}"
+  }
 }
 
 # Lambda Module for Generate MFA
