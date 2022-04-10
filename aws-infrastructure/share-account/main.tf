@@ -94,6 +94,9 @@ module "create-dynamo-record-lambda" {
   lambda_role_name        = "create-dynamo-record-lambda-role"
   lambda_role_description = "role for create dynamo record lambda"
   depends_on              = [data.archive_file.create_dist_pkg]
+  environment_variables   = {
+    "DDB_TABLE" = "${aws_dynamodb_table.dynamodb_table.id}"
+  }
 }
 
 # Lambda Module for Send Text Message
