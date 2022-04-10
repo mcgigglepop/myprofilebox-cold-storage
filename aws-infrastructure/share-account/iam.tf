@@ -118,6 +118,36 @@ resource "aws_iam_policy" "send_text_message_lambda_policy" {
 EOF
 }
 
+# IAM Policy for the Send Text Message Function
+resource "aws_iam_policy" "trigger_sfn_lambda_policy" {
+  name = "${var.project}-trigger-sfn-lambda-policy"
+  description = "IAM Policy for the Trigger State Machine Lambda Function"
+  path = "/"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*",
+      "Effect": "Allow",
+      "Sid": "VisualEditor0"
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": "states:*",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
 # Policy Attachment for the Encrypt Secret Lamdba Function
 resource "aws_iam_role_policy_attachment" "encrypt_secret_lambda_policy_attachment" {
   role = module.encrypt-secret-lambda.role_name
@@ -146,4 +176,10 @@ resource "aws_iam_role_policy_attachment" "create_dynamo_record_lambda_policy_at
 resource "aws_iam_role_policy_attachment" "send_text-message_lambda_policy_attachment" {
   role = module.send-text-message-lambda.role_name
   policy_arn = aws_iam_policy.send_text_message_lambda_policy.arn
+}
+
+# Policy attachment for the SFN Trigger Lambda
+resource "aws_iam_role_policy_attachment" "trigger_sfn_lambda_policy_attachment" {
+  role = module.trigger-sfn-lambda.role_name
+  policy_arn = aws_iam_policy.trigger_sfn_lambda_policy.arn
 }
