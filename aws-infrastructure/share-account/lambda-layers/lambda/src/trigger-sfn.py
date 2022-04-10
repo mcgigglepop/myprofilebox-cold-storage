@@ -13,8 +13,9 @@ def lambda_handler(event, context):
         payload = {
             "record_id": record_id,
             "password": "password",
-            "account": "account",
-            "username": "username"
+            "account_type": "account_type",
+            "account_username": "account_username",
+            "account_name": "account_name"
         }
 
         sfn.start_execution(
