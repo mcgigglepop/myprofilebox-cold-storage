@@ -138,6 +138,12 @@ resource "aws_iam_policy" "send_text_message_lambda_policy" {
       "Resource": "arn:aws:logs:*:*:*",
       "Effect": "Allow",
       "Sid": "VisualEditor0"
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": "sns:Publish",
+      "Resource": "*"
     }
   ]
 }
