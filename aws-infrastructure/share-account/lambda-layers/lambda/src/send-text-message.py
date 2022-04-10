@@ -13,7 +13,7 @@ def lambda_handler(event, context):
 
     # send text
     number = str(phone_number)
-    message = "Blackbox message. Use MFA code " + str(mfa) + " to retrieve your secret \n\n https://blackbox.com/view/"+ str(record_id)
+    message = "Someone is sharing an account with you. Use MFA code " + str(mfa) + " to retrieve your secret \n\n https://blackbox.com/view/"+ str(record_id)
     sns.publish(PhoneNumber = number, Message=message )
     
     result = {
