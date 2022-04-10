@@ -32,7 +32,7 @@ resource "aws_api_gateway_integration" "encrypt_integration" {
   http_method             = "${aws_api_gateway_method.encrypt_method.http_method}"
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = "${module.encrypt-secret-lambda.invoke_arn}"
+  uri                     = "${module.trigger-sfn-lambda.invoke_arn}"
   
   request_parameters = {
     "integration.request.header.X-Authorization" = "'static'"
@@ -123,4 +123,13 @@ resource "aws_api_gateway_usage_plan_key" "auth_key_usage_plan" {
   key_id        = "${aws_api_gateway_api_key.auth_key.id}"
   key_type      = "API_KEY"
   usage_plan_id = "${aws_api_gateway_usage_plan.usage_plan.id}"
+}
+
+# Permission to allow execution from api gateway to invoke the lambda function
+resource "aws_lambda_permission" "encrypt_lambda_permission" {
+  statement_id  = "AllowExecutionFromAPIGatewayEncrypt"
+  action        = "lambda:InvokeFunction"
+  function_name = "${module.trigger-sfn-lambda.function_name}"
+  principal     = "apigateway.amazonaws.com"
+  source_arn = "arn:aws:execute-api:${var.aws_region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.api_gateway.id}/*/${aws_api_gateway_method.encrypt_method.http_method}${aws_api_gateway_resource.encrypt_resource.path}"
 }
