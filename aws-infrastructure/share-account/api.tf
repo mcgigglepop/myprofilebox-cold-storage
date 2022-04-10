@@ -24,3 +24,26 @@ resource "aws_api_gateway_method" "encrypt_method" {
   authorization = "NONE"
   api_key_required = true
 }
+
+# Method Integration
+resource "aws_api_gateway_integration" "encrypt_integration" {
+  rest_api_id             = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id             = "${aws_api_gateway_resource.encrypt_resource.id}"
+  http_method             = "${aws_api_gateway_method.encrypt_method.http_method}"
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = "${module.encrypt-secret-lambda.invoke_arn}"
+  
+  request_parameters = {
+    "integration.request.header.X-Authorization" = "'static'"
+  }
+
+  # Transforms the incoming XML request to JSON
+  request_templates = {
+    "application/xml" = <<EOF
+{
+   "body" : $input.json('$')
+}
+EOF
+  }
+}
