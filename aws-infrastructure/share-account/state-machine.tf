@@ -37,3 +37,9 @@ resource "aws_iam_policy" "policy_invoke_lambda" {
 }
 EOF
 }
+
+# Attach policy to IAM Role for Step Function
+resource "aws_iam_role_policy_attachment" "iam_for_sfn_attach_policy_invoke_lambda" {
+  role       = aws_iam_role.iam_for_sfn.name
+  policy_arn = aws_iam_policy.policy_invoke_lambda.arn
+}
