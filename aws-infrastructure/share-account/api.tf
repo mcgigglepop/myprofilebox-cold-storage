@@ -229,3 +229,12 @@ resource "aws_lambda_permission" "encrypt_lambda_permission" {
   principal     = "apigateway.amazonaws.com"
   source_arn = "arn:aws:execute-api:${var.aws_region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.api_gateway.id}/*/${aws_api_gateway_method.encrypt_method.http_method}${aws_api_gateway_resource.encrypt_resource.path}"
 }
+
+# Permission to allow execution from api gateway to invoke the lambda function
+resource "aws_lambda_permission" "decrypt_lambda_permission" {
+  statement_id  = "AllowExecutionFromAPIGatewaydecrypt"
+  action        = "lambda:InvokeFunction"
+  function_name = "${module.decrypt-lambda.function_name}"
+  principal     = "apigateway.amazonaws.com"
+  source_arn = "arn:aws:execute-api:${var.aws_region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.api_gateway.id}/*/${aws_api_gateway_method.decrypt_method.http_method}${aws_api_gateway_resource.decrypt_resource.path}"
+}
