@@ -55,3 +55,16 @@ resource "aws_api_gateway_method" "cors_method_encrypt" {
   http_method   = "OPTIONS"
   authorization = "NONE"
 }
+
+# CORS Integration for the encrypt Endpoint
+resource "aws_api_gateway_integration" "cors_integration_encrypt" {
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway.id}"
+  resource_id = "${aws_api_gateway_resource.encrypt_resource.id}"
+  http_method = "${aws_api_gateway_method.cors_method_encrypt.http_method}"
+  type                    = "MOCK"
+  request_templates = {
+    "application/json" = <<EOF
+{ "statusCode": 200 }
+EOF
+  }
+}
