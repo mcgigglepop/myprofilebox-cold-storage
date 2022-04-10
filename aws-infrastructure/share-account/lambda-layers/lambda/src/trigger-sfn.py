@@ -15,7 +15,8 @@ def lambda_handler(event, context):
             "password": "password",
             "account_type": "account_type",
             "account_username": "account_username",
-            "account_name": "account_name"
+            "account_name": "account_name",
+            "phone_number": "phone_number"
         }
 
         sfn.start_execution(

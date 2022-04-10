@@ -1,4 +1,3 @@
-from doctest import master
 import json
 from random import randint
 
@@ -9,6 +8,7 @@ def lambda_handler(event, context):
     account_type = event["account_type"]
     account_username = event["account_username"]
     account_name = event["account_name"]
+    phone_number = event["phone_number"]
 
     # generate mfa
     mfa = random_with_N_digits(6)
@@ -18,7 +18,8 @@ def lambda_handler(event, context):
         "account_type": account_type,
         "account_username": account_username, 
         "account_name": account_name,
-        "mfa": mfa
+        "mfa": mfa,
+        "phone_number": phone_number
     }
 
     response = json.dumps(result)

@@ -15,6 +15,7 @@ def lambda_handler(event, context):
     account_type = event["account_type"]
     account_username = event["account_username"]
     account_name = event["account_name"]
+    phone_number = event["phone_number"]
 
     # encrypt secret
     ciphertext = client.encrypt(
@@ -30,7 +31,8 @@ def lambda_handler(event, context):
         "encoded_password": encoded_password,
         "account_type": account_type,
         "account_username": account_username,
-        "account_name": account_name
+        "account_name": account_name,
+        "phone_number": phone_number
     }
 
     response = json.dumps(result)
