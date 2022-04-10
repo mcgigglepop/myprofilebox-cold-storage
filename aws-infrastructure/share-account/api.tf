@@ -112,3 +112,8 @@ resource "aws_api_gateway_usage_plan" "usage_plan" {
     stage  = "${aws_api_gateway_deployment.deployment.stage_name}"
   }
 }
+
+# creates API Gateway key
+resource "aws_api_gateway_api_key" "auth_key" {
+  name = "${var.project}_auth_key"
+}
